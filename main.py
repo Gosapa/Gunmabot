@@ -26,7 +26,7 @@ async def list(ctx):
     except asyncio.TimeoutError:
         await ctx.channel.send("넌 방금 나에게 세가지 잘못을 저질렀다!")
     if(answer.content == "1"):
-        await ctx.channel.send(file = discord.File(r"library\temp.txt"))
+        await ctx.channel.send(file = discord.File(r"C:\Users\Ian\Desktop\silver_talkback\library\temp.txt"))
     else:
         await ctx.channel.send("그딴건 없다 애송이")
         
