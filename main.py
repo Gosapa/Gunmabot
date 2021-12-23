@@ -11,7 +11,13 @@ async def on_ready():
     print("Activated")
 
 
-
+@bot.command()
+async def join(ctx):
+    if ctx.author.voice and ctx.author.voice.channel:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+       else:
+        await ctx.send("너는 음성채널에 안들어가있다 애송이")
 @bot.command()
 async def airman(ctx):
     user = ctx.message.author
