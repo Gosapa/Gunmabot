@@ -1,4 +1,4 @@
-import discord, asyncio, os
+import discord, asyncio, os, nacl
 from discord.ext import commands
 
 
@@ -20,21 +20,9 @@ async def join(ctx):
         await ctx.send("너는 음성채널에 안들어가있다 애송이")
 @bot.command()
 async def airman(ctx):
-    user = ctx.message.author
-    voice_channel=user.voice.voice_channel
-    channel=None
-
-    if voice_channel != None:
-        channel = voice_channel.name
-        vc = await client.join_voice_channel(voice_channel)
-        player = vc.create_ffmpeg_player("bgm/airman.mp3")
-        player.start
-        while not player.is_done():
-            await asyncio.sleep(1)
-        player.stop()
-        await vc.disconnect()
-    else:
-        await client.say("보이스 채널에 먼저 들어가세요~")
+    channel = ctx.author.voice.channel
+    voice = await channel.connect()
+    voice.play(discord.FFmpegPCMAudio(executable="ffmpeg/bin/ffmpeg.exe",source="./bgm/airman.mp3"))
 
 @bot.command()
 async def leave(ctx):
@@ -88,5 +76,5 @@ async def on_message(message):
     if("흠" in user_message):
         await message.add_reaction("\N{Thinking Face}")
 
-TOKEN = os.environ["BOT_TOKEN"]
+TOKEN = os.environ["BOT_TOKEN"];
 bot.run(TOKEN)
