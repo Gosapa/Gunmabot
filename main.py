@@ -12,7 +12,31 @@ async def on_ready():
 
 
 
+@bot.command()
+async def airman(ctx):
+    user = ctx.message.author
+    voice_channel=user.voice.voice_channel
+    channel=None
 
+    if voice_channel != None:
+        channel = voice_channel.name
+        vc = await client.join_voice_channel(voice_channel)
+        player = vc.create_ffmpeg_player("bgm/airman.mp3")
+        player.start
+        while not player.is_done():
+            await asyncio.sleep(1)
+        player.stop()
+        await vc.disconnect()
+    else:
+        await client.say("보이스 채널에 먼저 들어가세요~")
+
+@bot.command()
+async def leave(ctx):
+    if(ctx.guild.voice_client):
+        await ctx.guild.voice_client.disconnect()
+    else:
+        await ctx.channel.send("난 음성채팅에 안들어와있다 애송이")
+        
 @bot.command()
 async def list(ctx):
     embed = discord.Embed(title = ":blue_book: 김휘준 작가님의 소설들", description = "개쩐다", color=0x00FFE1)
