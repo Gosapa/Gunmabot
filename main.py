@@ -1,7 +1,6 @@
 import discord, asyncio, os
 from discord.ext import commands
 
-TOKEN = "OTIzNDI2MjgyNjczNDIyMzU2.YcP1vg.1Rxu1_Z8oAmu2hCdT-uhd8fp7DY"
 
 game = discord.Game("짬씨처리")
 bot = commands.Bot(command_prefix="$", status = discord.Status.online, activity=game)
@@ -12,7 +11,13 @@ async def on_ready():
     print("Activated")
 
 
-
+@bot.command()
+async def join(ctx):
+    if ctx.author.voice and ctx.author.voice.channel:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    else:
+        await ctx.send("너는 음성채널에 안들어가있다 애송이")
 @bot.command()
 async def airman(ctx):
     user = ctx.message.author
@@ -38,7 +43,6 @@ async def leave(ctx):
     else:
         await ctx.channel.send("난 음성채팅에 안들어와있다 애송이")
         
-
 @bot.command()
 async def list(ctx):
     embed = discord.Embed(title = ":blue_book: 김휘준 작가님의 소설들", description = "개쩐다", color=0x00FFE1)
@@ -52,7 +56,7 @@ async def list(ctx):
     except asyncio.TimeoutError:
         await ctx.channel.send("넌 방금 나에게 세가지 잘못을 저질렀다!")
     if(answer.content == "1"):
-        await ctx.channel.send(file = discord.File(r"C:\Users\Ian\Desktop\실버가... 말대꾸\library\temp.txt"))
+        await ctx.channel.send(file = discord.File(r"library/temp.txt"))
     else:
         await ctx.channel.send("그딴건 없다 애송이")
         
@@ -66,9 +70,9 @@ async def on_message(message):
         return None
     if(username == "hartzling"):
         if("골드" in message.content):
-            await message.channel.send(file=discord.File(r"C:\Users\Ian\Desktop\실버가... 말대꾸\images\notgold.png"))
+            await message.channel.send(file=discord.File(r"images/notgold.png"))
         if(message.content.endswith("?")):
-            await message.channel.send(file=discord.File(r"C:\Users\Ian\Desktop\실버가... 말대꾸\images\maldeggu.jpeg"))
+            await message.channel.send(file=discord.File(r"images/maldeggu.jpeg"))
             await message.channel.send("실버가... 말대꾸?")
     if(username=="심규민"):
         await message.channel.send("억까와의 타협은 없다.")
@@ -84,5 +88,5 @@ async def on_message(message):
     if("흠" in user_message):
         await message.add_reaction("\N{Thinking Face}")
 
-
+TOKEN = os.environ["BOT_TOKEN"]
 bot.run(TOKEN)
