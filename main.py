@@ -1,7 +1,6 @@
 import discord, asyncio, os
 from discord.ext import commands
 
-TOKEN = "OTIzNDI2MjgyNjczNDIyMzU2.YcP1vg.1Rxu1_Z8oAmu2hCdT-uhd8fp7DY"
 
 game = discord.Game("짬씨처리")
 bot = commands.Bot(command_prefix="$", status = discord.Status.online, activity=game)
@@ -59,5 +58,5 @@ async def on_message(message):
     if("흠" in user_message):
         await message.add_reaction("\N{Thinking Face}")
 
-
+TOKEN = os.environ["BOT_TOKEN"]
 bot.run(TOKEN)
