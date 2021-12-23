@@ -26,7 +26,7 @@ async def list(ctx):
     except asyncio.TimeoutError:
         await ctx.channel.send("넌 방금 나에게 세가지 잘못을 저질렀다!")
     if(answer.content == "1"):
-        await ctx.channel.send(file = discord.File(r"C:\Users\Ian\Desktop\실버가... 말대꾸\library\temp.txt"))
+        await ctx.channel.send(file = discord.File(r"library\temp.txt"))
     else:
         await ctx.channel.send("그딴건 없다 애송이")
         
@@ -40,9 +40,9 @@ async def on_message(message):
         return None
     if(username == "hartzling"):
         if("골드" in message.content):
-            await message.channel.send(file=discord.File(r"C:\Users\Ian\Desktop\실버가... 말대꾸\images\notgold.png"))
+            await message.channel.send(file=discord.File(r"images\notgold.png"))
         if(message.content.endswith("?")):
-            await message.channel.send(file=discord.File(r"C:\Users\Ian\Desktop\실버가... 말대꾸\images\maldeggu.jpeg"))
+            await message.channel.send(file=discord.File(r"images\maldeggu.jpeg"))
             await message.channel.send("실버가... 말대꾸?")
     if(username=="심규민"):
         await message.channel.send("억까와의 타협은 없다.")
