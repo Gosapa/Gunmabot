@@ -54,7 +54,8 @@ async def spam(ctx,*args):
     for i in range(len(args) - 1):
         msg += args[i] + " "
     number = int(args[len(args)-1])
-
+    if number > 10:
+        number = 10
     for i in range(number):
         await ctx.channel.send(f"{msg.rstrip()}")
 
