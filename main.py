@@ -1,4 +1,4 @@
-import discord, asyncio, os
+import discord, asyncio, os, nacl
 from discord.ext import commands
 
 
@@ -70,14 +70,6 @@ async def on_message(message):
     user_message = str(message.content)
     if message.author.bot:
         return None
-    if(username == "hartzling"):
-        if("골드" in message.content):
-            await message.channel.send(file=discord.File(r"images/notgold.png"))
-        if(message.content.endswith("?")):
-            await message.channel.send(file=discord.File(r"images/maldeggu.jpeg"))
-            await message.channel.send("실버가... 말대꾸?")
-    if(username=="심규민"):
-        await message.channel.send("억까와의 타협은 없다.")
     if("섹스" in user_message):
         await message.add_reaction("\N{White Right Pointing Backhand Index}")
         await message.add_reaction("\N{OK Hand Sign}")
@@ -89,6 +81,16 @@ async def on_message(message):
         await message.add_reaction("\N{Baby}")
     if("흠" in user_message):
         await message.add_reaction("\N{Thinking Face}")
+    
+    if(username == "hartzling"):
+        if("골드" in message.content):
+            await message.channel.send(file=discord.File(r"images/notgold.png"))
+        if(message.content.endswith("?")):
+            await message.channel.send(file=discord.File(r"images/maldeggu.jpeg"))
+            await message.channel.send("실버가... 말대꾸?")
+    if(username=="심규민"):
+        await message.channel.send("억까와의 타협은 없다.")
+    
 
 TOKEN = os.environ["BOT_TOKEN"];
 bot.run(TOKEN)
