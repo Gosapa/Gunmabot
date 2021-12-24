@@ -25,14 +25,6 @@ async def airman(ctx):
     voice.play(discord.FFmpegPCMAudio(executable="ffmpeg/bin/ffmpeg.exe",source="./bgm/airman.mp3"))
 
 @bot.command()
-async def ping(ctx,person,time):
-    number = int(time)
-    for i in range(number):
-        await ctx.channel.send(f"{ctx.author.mention} gimotti")
-
-
-
-@bot.command()
 async def leave(ctx):
     if(ctx.guild.voice_client):
         await ctx.guild.voice_client.disconnect()
@@ -55,7 +47,12 @@ async def list(ctx):
         await ctx.channel.send(file = discord.File(r"library/temp.txt"))
     else:
         await ctx.channel.send("그딴건 없다 애송이")
-        
+
+@bot.command()
+async def ping(ctx,person,time):
+    number = int(time)
+    for i in range(number):
+        await ctx.channel.send(f"{ctx.author.mention} gimotti")
 
 @bot.event
 async def on_message(message):
