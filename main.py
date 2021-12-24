@@ -51,7 +51,6 @@ async def list(ctx):
 @bot.command()
 async def spam(ctx,*args):
     msg = ""
-    start = False
     for i in range(len(args) - 1):
         msg += args[i] + " "
     number = int(args[len(args)-1])
