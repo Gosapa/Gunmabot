@@ -49,10 +49,19 @@ async def list(ctx):
         await ctx.channel.send("그딴건 없다 애송이")
 
 @bot.command()
-async def ping(ctx,person,time):
-    number = int(time)
+async def spam(ctx,*args):
+    msg = ""
+    start = False
+    for i in range(len(args) - 1):
+        msg += args[i] + " "
+    number = int(args[len(args)-1])
+
     for i in range(number):
-        await ctx.channel.send(f"{ctx.author.mention} gimotti")
+        await ctx.channel.send(f"{msg.rstrip()}")
+
+@bot.command()
+async def molu(ctx):
+    await ctx.channel.send(file=discord.File(r"images/몰루.gif"))
 
 @bot.event
 async def on_message(message):
