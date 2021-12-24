@@ -1,4 +1,4 @@
-import discord, asyncio, os, nacl
+import discord, asyncio, os
 from discord.ext import commands
 
 
