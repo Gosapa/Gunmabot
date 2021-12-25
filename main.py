@@ -83,6 +83,7 @@ async def 러시작(ctx):
         russian_open = False
         return
     russian_start = True
+    await ctx.channel.send(file=discord.File(r"images/matjjang.png"))
     await ctx.channel.send("게임 시작.\n너에게 사이퍼(맞짱)을 신청한다 " + russian_list[russian_idx].mention + "!")
 @bot.command()
 async def 러종료(ctx):
