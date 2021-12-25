@@ -1,15 +1,28 @@
-import discord, asyncio, os, nacl
+import discord, asyncio, os, nacl, random
 from discord.ext import commands
 
+intents=discord.Intents.default()
+intents.members=True
 game = discord.Game("대통령 선거")
-bot = commands.Bot(command_prefix="$", status = discord.Status.online, activity=game)
+bot = commands.Bot(command_prefix="$", status = discord.Status.online, activity=game,intents = intents)
 client = discord.Client()
 
 @bot.event
 async def on_ready():
+    global russian_idx
+    russian_idx = 0
+    global russian_open
+    russian_open = False
+    global russian_start
+    russian_start = False
+    global russian_list
+    russian_list = []
     print("Activated")
 
-
+@bot.event
+async def on_member_join(member):
+    role = discord.utils.get(member.guild.roles, name = "아가")
+    await member.add_roles(role)
 @bot.command()
 async def join(ctx):
     if ctx.author.voice and ctx.author.voice.channel:
@@ -48,25 +61,79 @@ async def list(ctx):
         await ctx.channel.send("그딴건 없다 애송이")
 
 
-# @bot.command()
-# async def 러시안룰렛(ctx):
+
+@bot.command()
+async def 러시작(ctx):
+    global russian_open
+    global russian_list
+    global russian_start
+    if russian_open:
+        await ctx.channel.send("게임은 이미 시작되었다고 베이비")
+        return
+    russian_open = True
+    await ctx.channel.send("25초 후에 대통령 선거를 시작하겠다!")
+    await asyncio.sleep(25)
+    if len(russian_list) < 2:
+        await ctx.channel.send("참가자 부족.")
+        russian_open = False
+        russian_list = []
+        russian_start = False
+        russian_open = False
+        return
+    russian_start = True
+    await ctx.channel.send("게임 시작.\n너에게 사이퍼(맞짱)을 신청한다 " + russian_list[russian_idx].mention + "!")
+@bot.command()
+async def 러종료(ctx):
+    global russian_start
+    global russian_open
+    global russian_idx
+    global russian_list
+    russian_list = []
+    russian_start = False
+    russian_open = False
+    russian_idx = 0
+    await ctx.channel.send("게임이 종료되었다")
+@bot.command()
+async def 러참가(ctx):
+    global russian_start
+    global russian_open
+    global russian_list
+    if russian_start:
+        await ctx.channel.send("새끼가 뒷북을?")
+        return
+    if not(russian_open):
+        await ctx.channel.send("게임은 시작되지 않았다.")
+        return
+    if ctx.author in russian_list:
+        await ctx.channel.send("넌 이미 참가중이다.")
+        return
+    russian_list.append(ctx.author)
+    await ctx.channel.send(ctx.author.mention + " 게임참가")
+@bot.command()
+async def 러당겨(ctx):
+    global russian_start
+    global russian_open
+    global russian_idx
+    global russian_list
+    if not(russian_open):
+        await ctx.channel.send("게임은 시작되지 않았다.")
+        return
+    if not(russian_start):
+        await ctx.channel.send("참가자들을 받는중이다.")
+        return
+    if ctx.author == russian_list[russian_idx]:
+        if random.randrange(1,67) < 12:
+            await ctx.channel.send("ㅅㄱㅃㅇ")
+            role = discord.utils.get(ctx.guild.roles, name = "입마개")
+            await ctx.author.add_roles(role)
+            russian_list = []
+            russian_start = False
+            russian_open = False
+            russian_idx = 0
+        else:
+            russian_idx = (russian_idx+1)%len(russian_list)
+            await ctx.channel.send("다음 사이퍼(맞짱) 상대는 " + russian_list[russian_idx].mention + " 다!")
     
-#     members=[]
-#     for guild in bot.guilds:
-#         for member in guild.members:
-#             yield member
-#     # for member in ctx.guild.members:
-#     #     members.append(member)
-    
-#     player = []
-    
-#     role = discord.utils.get(ctx.guild.roles, name = "RR")
-#     await ctx.channel.send(role)
-#     await ctx.channel.send(len(members))
-#     for member in members:
-#         if(role in member.roles):
-#             player.append(member)
-#     await ctx.channel.send(player)
 
 
 @bot.command()
@@ -122,5 +189,6 @@ async def on_message(message):
         await message.channel.send("억까와의 타협은 없다.")
     
 
-TOKEN = os.environ["BOT_TOKEN"];
+#TOKEN = os.environ["BOT_TOKEN"];
+TOKEN = "OTIzNDI2MjgyNjczNDIyMzU2.YcP1vg.g8MIwCB1HJrcZljU-esoimksabY"
 bot.run(TOKEN)
