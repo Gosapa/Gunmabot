@@ -1,8 +1,7 @@
 import discord, asyncio, os, nacl
 from discord.ext import commands
 
-
-game = discord.Game("짬씨처리")
+game = discord.Game("대통령 선거")
 bot = commands.Bot(command_prefix="$", status = discord.Status.online, activity=game)
 client = discord.Client()
 
@@ -48,6 +47,28 @@ async def list(ctx):
     else:
         await ctx.channel.send("그딴건 없다 애송이")
 
+
+# @bot.command()
+# async def 러시안룰렛(ctx):
+    
+#     members=[]
+#     for guild in bot.guilds:
+#         for member in guild.members:
+#             yield member
+#     # for member in ctx.guild.members:
+#     #     members.append(member)
+    
+#     player = []
+    
+#     role = discord.utils.get(ctx.guild.roles, name = "RR")
+#     await ctx.channel.send(role)
+#     await ctx.channel.send(len(members))
+#     for member in members:
+#         if(role in member.roles):
+#             player.append(member)
+#     await ctx.channel.send(player)
+
+
 @bot.command()
 async def spam(ctx,*args):
     msg = ""
@@ -62,6 +83,15 @@ async def spam(ctx,*args):
 @bot.command()
 async def molu(ctx):
     await ctx.channel.send(file=discord.File(r"images/몰루.gif"))
+
+@bot.command()
+async def backdrillon(ctx):
+    await ctx.channel.send(file=discord.File(r"images/BackDrillKickOn.png"))
+
+@bot.command()
+async def backdrilloff(ctx):
+    await ctx.channel.send(file=discord.File(r"images/BAckDrillKickOff.png"))
+
 
 @bot.event
 async def on_message(message):
