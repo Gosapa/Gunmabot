@@ -73,6 +73,8 @@ async def 러시작(ctx):
     russian_open = True
     await ctx.channel.send("25초 후에 대통령 선거를 시작하겠다!")
     await asyncio.sleep(25)
+    if not(russian_open):
+        return
     if len(russian_list) < 2:
         await ctx.channel.send("참가자 부족.")
         russian_open = False
