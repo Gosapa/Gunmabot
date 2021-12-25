@@ -189,6 +189,5 @@ async def on_message(message):
         await message.channel.send("억까와의 타협은 없다.")
     
 
-#TOKEN = os.environ["BOT_TOKEN"];
-TOKEN = "OTIzNDI2MjgyNjczNDIyMzU2.YcP1vg.g8MIwCB1HJrcZljU-esoimksabY"
+TOKEN = os.environ["BOT_TOKEN"];
 bot.run(TOKEN)
