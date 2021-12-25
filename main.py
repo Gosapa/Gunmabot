@@ -90,7 +90,7 @@ async def backdrillon(ctx):
 
 @bot.command()
 async def backdrilloff(ctx):
-    await ctx.channel.send(file=discord.File(r"images/BAckDrillKickOff.png"))
+    await ctx.channel.send(file=discord.File(r"images/BackDrillKickOff.png"))
 
 
 @bot.event
