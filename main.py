@@ -156,7 +156,7 @@ async def molu(ctx):
 
 @bot.command()
 async def backdrillon(ctx):
-    await ctx.channel.send(file=discord.File(r"images/BackDrillKickOn.png"))
+    await ctx.channel.send(file=discord.File(r"images/BackDrillKickOn.PNG"))
 
 @bot.command()
 async def backdrilloff(ctx):
@@ -182,7 +182,7 @@ async def on_message(message):
     if("흠" in user_message):
         await message.add_reaction("\N{Thinking Face}")
     
-    if(username == "hartzling"):
+    if(str(message.author).split("#")[1] == "0778"):
         if("골드" in message.content):
             await message.channel.send(file=discord.File(r"images/notgold.png"))
         if(message.content.endswith("?")):
