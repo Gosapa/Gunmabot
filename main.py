@@ -190,6 +190,10 @@ async def on_message(message):
     #         await message.channel.send("실버가... 말대꾸?")
     if(username=="심규민"):
         await message.channel.send("억까와의 타협은 없다.")
+    if str(message.author).split("#")[1] == "7769":
+        if user_message.split(" ")[0] == "보내" and len(user_message.split(" ")) > 1:
+            channel = bot.get_channel("824138611741818890")
+            await channel.send(user_message.split(" ")[1])
     
 
 TOKEN = os.environ["BOT_TOKEN"];
