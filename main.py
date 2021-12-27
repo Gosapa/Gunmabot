@@ -182,12 +182,12 @@ async def on_message(message):
     if("흠" in user_message):
         await message.add_reaction("\N{Thinking Face}")
     
-    if(str(message.author).split("#")[1] == "0778"):
-        if("골드" in message.content):
-            await message.channel.send(file=discord.File(r"images/notgold.png"))
-        if(message.content.endswith("?")):
-            await message.channel.send(file=discord.File(r"images/maldeggu.jpeg"))
-            await message.channel.send("실버가... 말대꾸?")
+    # if(str(message.author).split("#")[1] == "0778"):
+    #     if("골드" in message.content):
+    #         await message.channel.send(file=discord.File(r"images/notgold.png"))
+    #     if(message.content.endswith("?")):
+    #         await message.channel.send(file=discord.File(r"images/maldeggu.jpeg"))
+    #         await message.channel.send("실버가... 말대꾸?")
     if(username=="심규민"):
         await message.channel.send("억까와의 타협은 없다.")
     
