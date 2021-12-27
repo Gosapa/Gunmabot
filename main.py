@@ -196,7 +196,8 @@ async def on_message(message):
             channel = bot.get_channel(824138611741818890)
             msg = ""
             for i in range(len(yes) - 1):
-                msg = yes[i+1]
+                msg += yes[i+1] + " "
+            print(msg)
             await channel.send(msg.strip())
     
 
