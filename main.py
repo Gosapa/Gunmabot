@@ -197,7 +197,6 @@ async def on_message(message):
             msg = ""
             for i in range(len(yes) - 1):
                 msg += yes[i+1] + " "
-            print(msg)
             await channel.send(msg.strip())
     
 
